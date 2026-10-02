@@ -1,4 +1,4 @@
-# Model Rocket - Thrust Vector Control
+# Model Rocket — Thrust Vector Control
 
 An experimental model-rocket project combining embedded flight software, attitude estimation, servo-driven thrust vector control, CAD and MATLAB/Simulink modelling.
 
@@ -6,7 +6,7 @@ This is **Ben Lies's personal fork** of the [team project](https://github.com/C4
 
 [![Watch the project video](Sketches/thumbnail.jpg)](https://www.youtube.com/watch?v=yQALvxHjtCE)
 
-[Watch the project video](https://www.youtube.com/watch?v=yQALvxHjtCE) � [Flight software](FINAL_CODE/TVC-Flight-Code) � [Simulation](MatLab%20Sim) � [CAD](TVC/Design)
+[Watch the project video](https://www.youtube.com/watch?v=yQALvxHjtCE) · [Flight software](FINAL_CODE/TVC-Flight-Code) · [Simulation](MatLab%20Sim) · [CAD](TVC/Design)
 
 ## Engineering highlights
 
@@ -62,4 +62,4 @@ This fork originates from [C442/Rocket](https://github.com/C442/Rocket); the pro
 
 The simulation folder includes a [MathWorks File Exchange reference](https://www.mathworks.com/matlabcentral/fileexchange/80716-modeling-a-thrust-vector-controlled-rocket-in-simulink) and its accompanying [licence](MatLab%20Sim/license.txt). Some mechanical inspiration comes from the [K-9 TVC gimbal](https://www.printables.com/model/9920-k-9-rocket-thrust-vector-control-gimbal-v8/related?lang=de). Retain the original attributions and licences when reusing those materials.
 
-[Original project overview and references](https://github.com/BigblenHD/Rocket/blob/d0241f04cd03e6945dc0eed0d03ca0bd48970ab1/README.md) � [Ben's portfolio](https://benlies.com)
+[Original project overview and references](https://github.com/BigblenHD/Rocket/blob/d0241f04cd03e6945dc0eed0d03ca0bd48970ab1/README.md) · [Ben's portfolio](https://benlies.com)
