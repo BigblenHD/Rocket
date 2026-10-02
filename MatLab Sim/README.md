@@ -1,29 +1,32 @@
-# Modeling a Thrust Vector Controlled Rocket in Simulink
+# Rocket modelling and control analysis
 
-[![View Modeling a Thrust Vector Controlled Rocket in Simulink on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/80716-modeling-a-thrust-vector-controlled-rocket-in-simulink)
+MATLAB/Simulink models and supporting scripts used during TVC development.
 
-Thrust Vectoring or Thrust Vector control is the ability of an aircraft or a rocket's propulsion system to manipulate the direction of its thrust to control the rocket or aircrafts attitude or angular velocity. Adjusting the gimbal angle, controls the direction and attitude of the of the rocket as shown in the image below
+## Files
 
+| File | Purpose |
+| --- | --- |
+| `RocketStateSpace.slx` | State-space rocket model |
+| `advancedTVCRocketModel.slx` | Additional TVC simulation model |
+| `State_Control_Matrices.m` | Defines a two-state model and calculates feedback gains using `lqr` |
+| `Thrust_Data.m` | Thrust-data preparation |
+| `TVC_Identification.m` | Prepares input/output data as an `iddata` object |
+| `Get_Logged_Data.m` | Logged-data helper |
 
-![Gimbaled_thrust_diagram](https://upload.wikimedia.org/wikipedia/commons/7/7a/En_Gimbaled_thrust_diagram.svg)
+## Getting started
 
-<a href="https://commons.wikimedia.org/wiki/File:En_Gimbaled_thrust_diagram.svg" title="via Wikimedia Commons">Gimbaled_thrust_diagram.gif:Brian0918 at en.wikipediaderivative work: Titimaster</a> / Public domain
+Open MATLAB in this folder and inspect the model's callbacks and workspace dependencies before running a simulation. `lqr` requires Control System Toolbox; `iddata` requires System Identification Toolbox. Simulink model requirements depend on the blocks used, and the project's MATLAB release is not recorded.
 
+`TVC_Identification.m` expects `simdata_tvc.txt` and `simdata_realtvc.txt` in the working directory. Those files are stored under [`TVC/Real_Life_Simulation`](../TVC/Real_Life_Simulation); adjust the paths or copy the files into your working directory.
 
-Code in this repository is discussed in this BPS.Space YouTube video shown below.[![](http://img.youtube.com/vi/nwgd1CV__rs/0.jpg)](http://www.youtube.com/watch?v=nwgd1CV__rs "")
+The gain-calculation script and firmware contain different controller settings. Treat them as development revisions rather than assuming the script reproduces the deployed configuration.
 
-To use the files,
+## Upstream reference and attribution
 
+The original documentation cites [Modeling a Thrust Vector Controlled Rocket in Simulink](https://www.mathworks.com/matlabcentral/fileexchange/80716-modeling-a-thrust-vector-controlled-rocket-in-simulink) and the accompanying [BPS.Space video](https://www.youtube.com/watch?v=nwgd1CV__rs). The included [licence](license.txt) applies to the corresponding upstream material.
 
-- Clone the repository as seen [here](https://www.mathworks.com/help/simulink/ug/clone-git-repository.html)
+The original instructions referred to `simpleTVCRocketModel.slx`, which is not present in this fork. Use the model files listed above.
 
-- Open `simpleTVCRocketModel.slx`
+![Gimballed thrust diagram](https://upload.wikimedia.org/wikipedia/commons/7/7a/En_Gimbaled_thrust_diagram.svg)
 
-- Click the appropriate hyperlink to choose between a simple Aerospace Blockset or Simscape implementation
-
-- Move the Gimbal angle slider to see the effect of different gimbal angles on the trajectory of the rocket. 
-
-
-
-
-[Learn how to get MATLAB and Simulink](https://www.mathworks.com/products/get-matlab.html)
+Diagram: [Brian0918 / Titimaster, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:En_Gimbaled_thrust_diagram.svg), public domain.

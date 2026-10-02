@@ -1,98 +1,65 @@
-Rocket 2025
-======
-[![Project 2025](https://img.youtube.com/vi/yQALvxHjtCE/0.jpg)](http://www.youtube.com/watch?v=yQALvxHjtCE)
+# Model Rocket - Thrust Vector Control
 
+An experimental model-rocket project combining embedded flight software, attitude estimation, servo-driven thrust vector control, CAD and MATLAB/Simulink modelling.
 
-Welcome to our latest Project: a rocket guidance system. 
+This is **Ben Lies's personal fork** of the [team project](https://github.com/C442/Rocket). It preserves the shared development work and provides an entry point into the engineering behind the rocket.
 
-This project took around half a year to build, the other part of the year was spent documenting it. It was originally aimed to improve larger project management under time pressure and university schedule. We wanted to do this project a few years ago already, but somehow ended up with other side quests to fulfill, so this can be seen as our last highschool project, marking a waypoint for bigger, badder and more complex projects. I almost forgot that this project was also supposed to "cure problems related to boredom" and I want to point out that it definitely managed to fill quite some hours...maybe a few too many? Nah...this was worth it. 
+[![Watch the project video](Sketches/thumbnail.jpg)](https://www.youtube.com/watch?v=yQALvxHjtCE)
 
-This repo will only serve as a project overview and memory. This encompasses the code, the prints, the project paper and most importantly: some pictures 
+[Watch the project video](https://www.youtube.com/watch?v=yQALvxHjtCE) � [Flight software](FINAL_CODE/TVC-Flight-Code) � [Simulation](MatLab%20Sim) � [CAD](TVC/Design)
 
+## Engineering highlights
 
-Table of Content
-================
+- **Embedded C++:** flight-state management, peripheral integration and buffered SD-card logging on Teensy 4.1.
+- **Attitude estimation:** BNO055 accelerometer/gyroscope readings with a Madgwick filter.
+- **Control systems:** PID experiments and state-feedback control, thrust-curve interpolation and calibrated gimbal-to-servo mappings.
+- **Modelling and analysis:** MATLAB/Simulink models, LQR gain calculation, actuator identification and Python/Jupyter data analysis.
+- **Mechanical integration:** two-axis gimbal designs and a servo-driven parachute deployment mechanism.
 
-<!--ts-->
-- [Visual Designs](#Visual-Designs)
-- [Board Computer](#Board-Computer)
-- [Parachute Deployment](#Parachute-Deployment)
-- [Thrust Vector Control System](#TVC-System)
-- [About us](#About-us)
-<!--te-->
+## Start here
 
-Visual Designs
-==============
-<img src="Sketches/rocket.png" alt="Eagle PCB" width="400"/>
+| Area | Entry point | What it contains |
+| --- | --- | --- |
+| Integrated firmware | [`TVC-Flight-Code`](FINAL_CODE/TVC-Flight-Code) | Flight loop, state machine, controller, sensors and logging |
+| Main control implementation | [`Rocket.cpp`](FINAL_CODE/TVC-Flight-Code/Rocket.cpp) | Sensor fusion, state feedback, thrust interpolation and servo commands |
+| Flight sequencing | [`StateMachine.cpp`](FINAL_CODE/TVC-Flight-Code/StateMachine.cpp) | Launch-pad idle, ascent, descent and landed states |
+| Simulation | [`MatLab Sim`](MatLab%20Sim) | Simulink models and MATLAB scripts |
+| Gimbal geometry | [`TVC/Design`](TVC/Design) | Printable mechanical parts |
+| Experimental work | [`TVC`](TVC) | PID, state-feedback, calibration and sensor experiments |
 
-Board Computer
-==============
-<img src="Sketches/Board_Computer.png" alt="Eagle PCB" width="400"/>
+## Hardware and software
 
+The integrated firmware targets **Teensy 4.1** and uses a **BNO055 IMU**, a **BMP3XX-family barometer**, two TVC servos, a deployment servo and the built-in SD-card interface.
 
-Parachute Deployment
-====================
-<img src="Sketches/Chute_Deploy_Demo.gif" alt="Demo Preview" width="400"/>
+Dependencies include Arduino/Teensy support, Adafruit BNO055, Adafruit BMP3XX, MadgwickAHRS, Servo, SD and Wire. The source calls `setInitialRollPitch()` on the Madgwick filter; a compatible implementation is required, and the exact library revision is not recorded.
 
-TVC System
-==========
-<img src="Sketches/TVC_Image.jpg" alt="TVC System" width="400"/>
+See the [firmware guide](FINAL_CODE/TVC-Flight-Code/README.md) for architecture, source entry points and build limitations.
 
-References
-==========
+## Visual overview
 
-1. [Collins Dictionary – Rocketry](https://www.collinsdictionary.com/dictionary/english/rocketry)  
-   Accessed 12 January 2026.
+### Rocket and electronics
 
-2. [YouTube Video – Our first rocket launch](https://www.youtube.com/watch?v=nfHlhmoQnFs)  
-   Accessed 27 January 2026.
+<img src="Sketches/rocket.png" alt="Rocket design overview" width="300"/>
+<img src="Sketches/Board_Computer.png" alt="Flight computer board design" width="400"/>
 
-3. [Luxembourg Space Agency – Spacewatch Global Article](https://spacewatch.global/2018/09/luxembourg-space-agency-open-for-business-as-new-space-hub/)  
-   Accessed 28 January 2026.
+### Thrust vector control
 
-4. [BBC News – Rocket Article](https://www.bbc.com/news/articles/cjewvpkw7weo)
+<img src="Sketches/TVC_Image.jpg" alt="Two-axis thrust vector control assembly" width="500"/>
 
-5. [NASA Rockets Educator Guide](https://www.nasa.gov/wp-content/uploads/2012/07/rockets-educator-guide-20.pdf)  
-   Accessed 28 January 2026.
+### Parachute deployment prototype
 
-6. [Wikipedia – Booster (Rocketry)](https://en.wikipedia.org/wiki/Booster_(rocketry))  
-   Accessed 28 January 2026.
+<img src="Sketches/Chute_Deploy_Demo.gif" alt="Servo-driven parachute deployment demonstration" width="400"/>
 
-7. [BBC Science & Environment – Rocket Article](https://www.bbc.com/news/science-environment-24331860)  
-   Accessed 28 January 2026.
+## Status and scope
 
-8. [Eurocircuits – PCB Manufacturing](https://www.eurocircuits.com/)  
-   Accessed 2 February 2026.
+This is a development archive with integrated firmware, bench experiments, simulations and mechanical prototypes. The code requests a 100 Hz flight loop; that setting is not evidence of a measured sustained execution rate. Apogee and landing transitions in the integrated state machine use fixed time thresholds.
 
-9. [Printables – Rocket Thrust Vector Control Gimbal](https://www.printables.com/model/9920-k-9-rocket-thrust-vector-control-gimbal-v8/related?lang=de)  
-   Accessed 2 February 2026.
+The repository does not establish successful closed-loop flight performance or a reproducible build. Simulation results and prototype demonstrations should be assessed separately from flight validation.
 
-10. [YouTube – Nicola Gaiani](https://www.youtube.com/@nicola_gaiani)  
-    Accessed 2 February 2026.
+## Attribution
 
-11. [Springer – Technische Mechanik Buch](https://link.springer.com/book/10.1007/978-3-662-59886-3)  
-    p. 290. Accessed 9 February 2026.
+This fork originates from [C442/Rocket](https://github.com/C442/Rocket); the project is shared work. The original README credits use of ChatGPT for text editing and code generation.
 
-12. [Wikipedia – PID Controller](https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller)  
-    Accessed 28 January 2026.
+The simulation folder includes a [MathWorks File Exchange reference](https://www.mathworks.com/matlabcentral/fileexchange/80716-modeling-a-thrust-vector-controlled-rocket-in-simulink) and its accompanying [licence](MatLab%20Sim/license.txt). Some mechanical inspiration comes from the [K-9 TVC gimbal](https://www.printables.com/model/9920-k-9-rocket-thrust-vector-control-gimbal-v8/related?lang=de). Retain the original attributions and licences when reusing those materials.
 
-13. [YouTube – Parachute Ejection Inspiration](https://www.youtube.com/watch?v=COkh5ykzC3Y)  
-    Accessed 9 February 2026.
-
-14. [Madgwick Filter Explanation](https://medium.com/@k66115704/imu-madgwick-filter-explanation-556fbe7f02e3)  
-    Accessed 9 February 2026.
-
-15. [Introduction to Quaternions](https://lisyarus.github.io/blog/posts/introduction-to-quaternions.html)  
-    Accessed 9 February 2026.
-
-16. [YouTube – Moto Moto Song](https://www.youtube.com/watch?v=vx5vpG6jEXI)  
-    Accessed 9 February 2026.
-
-17. ChatGPT was used to check the text and correct it. In the abstract it was used to rephrase. It was also used to generate code.
-
-18. [Project GitHub Repository](https://github.com/C442/Rocket)  
-    The repository designated to this project.
-
-About us
-========
-<img src="Sketches/Logo.png" alt="Logo" width="200"/>
+[Original project overview and references](https://github.com/BigblenHD/Rocket/blob/d0241f04cd03e6945dc0eed0d03ca0bd48970ab1/README.md) � [Ben's portfolio](https://benlies.com)
